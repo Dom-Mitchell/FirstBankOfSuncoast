@@ -53,7 +53,7 @@ namespace FirstBankOfSuncoast
             return foundUser;
         }
 
-        public void UserNameExists(string nameToFind)
+        public void UserExists(string nameToFind)
         {
             var foundUserName = Users.Any(user => user.UserName.Equals(nameToFind));
             var notUserName = false;
@@ -133,27 +133,27 @@ namespace FirstBankOfSuncoast
             //var userExists = Users.Contains(Users.UserName(nameToFind));
         }
 
-        public void UserPassWordExists(int passwordToFind)
-        {
-            var notUserPassword = false;
-            // while (!notUserPassword)
-            // {
+        // public void UserPassWordExists(int passwordToFind)
+        // {
+        //     var notUserPassword = false;
+        //     // while (!notUserPassword)
+        //     // {
 
-            //     var foundUserName = Users.Any(user => user.Password.Equals(passwordToFind));
+        //     //     var foundUserName = Users.Any(user => user.Password.Equals(passwordToFind));
 
-            //     if (foundUserName)
-            //     {
-            //         Console.WriteLine("Password found!");
-            //         break;
-            //     }
-            //     else
-            //     {
-            //         Console.WriteLine("Your password is NOT correct!\nPlease try again!");
-            //         break;
-            //     }
-            // }
+        //     //     if (foundUserName)
+        //     //     {
+        //     //         Console.WriteLine("Password found!");
+        //     //         break;
+        //     //     }
+        //     //     else
+        //     //     {
+        //     //         Console.WriteLine("Your password is NOT correct!\nPlease try again!");
+        //     //         break;
+        //     //     }
+        //     // }
 
-            //var userExists = Users.Contains(Users.UserName(nameToFind));
-        }
+        //     //var userExists = Users.Contains(Users.UserName(nameToFind));
+        // }
     }
 }

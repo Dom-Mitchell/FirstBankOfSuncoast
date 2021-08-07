@@ -99,7 +99,7 @@ namespace FirstBankOfSuncoast
             var userNameToSearchFor = PromptForString("\nWhat is your username? ");
             //var passwordToSearchFor = PromptForInteger("What is your pin number? ");
 
-            database.UserNameExists(userNameToSearchFor);
+            database.UserExists(userNameToSearchFor);
 
             // var passwordToSearchFor = PromptForInteger("What is your pin number? ");
             // database.UserPassWordExists(passwordToSearchFor);
