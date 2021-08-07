@@ -55,21 +55,103 @@ namespace FirstBankOfSuncoast
 
         public void UserNameExists(string nameToFind)
         {
+            var foundUserName = Users.Any(user => user.UserName.Equals(nameToFind));
             var notUserName = false;
+            var noLongEnough = false;
+
             while (!notUserName)
             {
-                var foundUserName = Users.FirstOrDefault(user => user.UserName.Contains(nameToFind));
 
-                if (foundUserName.ToString() == nameToFind)
+                if (foundUserName)
                 {
-                    break;
 
+                    while (!noLongEnough)
+                    {
+                        Console.WriteLine("User found!");
+                        Console.WriteLine($"What is you pin number, {nameToFind}? ");
+
+
+                        var usersPassword = Console.ReadLine();
+                        if (usersPassword.Length == 4)
+                        {
+                            var foundUserPassword = Users.Where(user => user.Password.Equals(usersPassword));
+                            if (usersPassword == foundUserPassword.ToString())
+                            {
+                                Console.WriteLine("User pin matches!");
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Your password is NOT correct!\nPlease try again!");
+                                break;
+                            }
+
+                            //break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nYour answer was invalid. Please try again!");
+                            Console.WriteLine("Your choice must be 4 characters long");
+                        }
+
+                    }
+
+
+                    break;
+                    // return foundUserName.ToString();
                 }
                 else
                 {
                     Console.WriteLine("Your username is NOT correct!\nPlease try again!");
+                    // return null;
+                    break;
                 }
             }
+            //var foundUserPassword = Users.Any(user => user.Password.Equals(passwordToFind) == user.Password.Equals(nameToFind));
+
+            // while (!notUserPassword)
+            // {
+
+
+
+            //     if (foundUserName)
+            //     {
+            //         Console.WriteLine("Password found!");
+            //         notUserPassword = true;
+            //         // break;
+            //     }
+            //     else
+            //     {
+            //         Console.WriteLine("Your password is NOT correct!\nPlease try again!");
+            //         notUserPassword = false;
+            //         // break;
+            //     }
+            // }
+
+            // return null;
+
+            //var userExists = Users.Contains(Users.UserName(nameToFind));
+        }
+
+        public void UserPassWordExists(int passwordToFind)
+        {
+            var notUserPassword = false;
+            // while (!notUserPassword)
+            // {
+
+            //     var foundUserName = Users.Any(user => user.Password.Equals(passwordToFind));
+
+            //     if (foundUserName)
+            //     {
+            //         Console.WriteLine("Password found!");
+            //         break;
+            //     }
+            //     else
+            //     {
+            //         Console.WriteLine("Your password is NOT correct!\nPlease try again!");
+            //         break;
+            //     }
+            // }
 
             //var userExists = Users.Contains(Users.UserName(nameToFind));
         }
