@@ -74,8 +74,10 @@ namespace FirstBankOfSuncoast
                         var usersPassword = Console.ReadLine();
                         if (usersPassword.Length == 4)
                         {
-                            var foundUserPassword = Users.Where(user => user.Password.Equals(usersPassword));
-                            if (usersPassword == foundUserPassword.ToString())
+                            var user = Users.First(user => user.Password == Int32.Parse(nameToFind));
+                            //var user = Users.First(user => user.Password == Int32.Parse(usersPassword) && user.Password == Int32.Parse(nameToFind));
+                            //var foundUserPassword = Users.Where(user => user.Password.Equals(usersPassword));
+                            if (Int32.Parse(usersPassword) == user.Password)
                             {
                                 Console.WriteLine("User pin matches!");
                                 break;
