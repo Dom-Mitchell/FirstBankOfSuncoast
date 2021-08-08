@@ -38,6 +38,10 @@ namespace FirstBankOfSuncoast
             fileWriter.Close();
         }
 
+        public void AddTransaction(Transaction newTransaction)
+        {
+            Transactions.Add(newTransaction);
+        }
 
     }
 }

@@ -53,6 +53,23 @@ namespace FirstBankOfSuncoast
             }
         }
 
+        static double PromptForDouble(string prompt)
+        {
+            Console.Write(prompt);
+            double userInput;
+            var isThisGoodInput = Double.TryParse(Console.ReadLine(), out userInput);
+
+            if (isThisGoodInput)
+            {
+                return userInput;
+            }
+            else
+            {
+                Console.WriteLine("Sorry, that isn't a valid input, I'm using 0.0 as your answer.");
+                return 0;
+            }
+        }
+
         private static void AddUser(UserDatabase database)
         {
             var user = new User();
@@ -94,13 +111,14 @@ namespace FirstBankOfSuncoast
             database.SaveUsers();
         }
 
-        private static void ExistingUser(UserDatabase database)
+        private static string ExistingUser(UserDatabase database)
         {
             var userNameToSearchFor = PromptForString("\nWhat is your username? ");
             //var passwordToSearchFor = PromptForInteger("What is your pin number? ");
 
             database.UserExists(userNameToSearchFor);
-
+            //newMenu();
+            return userNameToSearchFor;
             // var passwordToSearchFor = PromptForInteger("What is your pin number? ");
             // database.UserPassWordExists(passwordToSearchFor);
 
@@ -108,6 +126,56 @@ namespace FirstBankOfSuncoast
             // database.UserNameExists(userNameToSearchFor);
 
         }
+
+        static void newMenu(string usersName)
+        {
+            Console.Clear();
+            DisplayGreeting();
+
+            var keepGoing = true;
+
+            var databaseTransaction = new TransactionDatabase();
+
+            while (keepGoing)
+            {
+                Console.Write("\nWhat do you want to do?\n(W)ithdraw\n(D)eposit\n(B)alance Inquiry\n(Q)uit\n: ");
+                var choice = Console.ReadLine().ToUpper();
+
+                switch (choice)
+                {
+                    case "W":
+                        break;
+                    case "D":
+                        makeDeposit(databaseTransaction, usersName);
+                        break;
+                    case "B":
+                        break;
+                    case "Q":
+                        Console.WriteLine();
+                        keepGoing = false;
+                        break;
+                    default:
+                        Console.WriteLine("\nYour answer was invalid. Please try again!");
+                        break;
+                }
+            }
+
+        }
+
+        static void makeDeposit(TransactionDatabase database, string usersName)
+        {
+            var transacion = new Transaction();
+
+            transacion.Name = $"{usersName}";
+            transacion.Account = PromptForString("Is this your Checking or Savings Account? ");
+            transacion.Type = "Deposit";
+            transacion.Amount = PromptForDouble("How much money would you like to add? ");
+            transacion.TimeStamp = DateTime.Now;
+
+            database.AddTransaction(transacion);
+            database.SaveTransactions();
+        }
+
 
         static void Main(string[] args)
         {
@@ -139,6 +207,8 @@ namespace FirstBankOfSuncoast
                         break;
                     case "L":
                         ExistingUser(databaseUser);
+                        newMenu(ExistingUser(databaseUser));
+                        keepGoing = false;
                         break;
                     case "Q":
                         Console.WriteLine();
@@ -148,6 +218,7 @@ namespace FirstBankOfSuncoast
                         Console.WriteLine("\nYour answer was invalid. Please try again!");
                         break;
                 }
+                //break;
 
             }
 
