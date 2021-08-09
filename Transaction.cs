@@ -8,7 +8,7 @@ namespace FirstBankOfSuncoast
         public string Account { get; set; } // Checking or Savings
         public string Type { get; set; } // Withdrawal or Deposit
         public double Amount { get; set; }
-        public DateTime TimeStamp { get; set; }
+        public DateTime TimeStamp { get; set; } = DateTime.Now;
 
         // public string FormattedDate()
         // {
@@ -25,13 +25,13 @@ namespace FirstBankOfSuncoast
             switch (Type)
             {
                 case "Withdraw":
-                    return $"{Amount} was withdrawn by {Name} from {Account} account at {TimeStamp}.";
+                    return $"${Amount} was withdrawn by {Name} from {Account} account at {TimeStamp}.";
                 case "Withdraw to Transfer":
-                    return $"{Amount} was withdrawn by {Name} for transfer from {Account} account at {TimeStamp}.";
+                    return $"${Amount} was withdrawn by {Name} to transfer from {Account} account at {TimeStamp}.";
                 case "Deposit":
-                    return $"{Amount} was deposited by {Name} into {Account} account at {TimeStamp}.";
+                    return $"${Amount} was deposited by {Name} into {Account} account at {TimeStamp}.";
                 case "Deposit to Transfer":
-                    return $"{Amount} was deposited by {Name} for transfer into {Account} account at {TimeStamp}.";
+                    return $"{Amount} was deposited by {Name} to transfer into {Account} account at {TimeStamp}.";
                 default:
                     return "\nYour answer was invalid. Please try again!";
 

@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
 using CsvHelper;
+using Pastel;
 
 namespace FirstBankOfSuncoast
 {
@@ -104,14 +107,14 @@ namespace FirstBankOfSuncoast
 
             while (!correctUserNameLength)
             {
-                Console.Write("\nPlease enter your username (8 Characters max) ");
+                Console.WriteLine("\nPlease enter your username (8 Characters max) ");
                 existingUserName = Console.ReadLine();
 
                 if (existingUserName.Length <= 8)
                 {
                     if (Users.Any(user => user.UserName == existingUserName))
                     {
-                        Console.Write("User found!\n");
+                        Console.Write($"{"User found!".Pastel(Color.LimeGreen)}\n");
                         break;
                     }
                     else
@@ -133,14 +136,41 @@ namespace FirstBankOfSuncoast
             while (!correctPinLength)
             {
                 Console.WriteLine("\nPlease enter your pin number (4 numbers, ####) ");
-                var existingPassword = Console.ReadLine();
+                var existingPassword = "";
+
+                StringBuilder sb = new StringBuilder();
+                while (true)
+                {
+                    var keyPressed = Console.ReadKey(true);
+
+                    if (keyPressed.Key == ConsoleKey.Enter)
+                    {
+                        break;
+                    }
+                    if (keyPressed.Key == ConsoleKey.Backspace)
+                    {
+                        if (sb.Length > 0)
+                        {
+                            Console.Write("\b \b");
+                            sb.Length--;
+                        }
+                        continue;
+                    }
+
+                    Console.Write("*");
+                    sb.Append(keyPressed.KeyChar);
+
+
+                }
+                existingPassword += sb.ToString();
+                // Console.WriteLine($"\n{existingPassword}");
 
                 if (existingPassword.Length == 4)
                 {
                     SingularUser = Users.First(user => user.UserName == existingUserName);
                     if (SingularUser.Password.ToString() == existingPassword)
                     {
-                        Console.WriteLine("Password correct!");
+                        Console.WriteLine($"\n{"Password correct!".Pastel(Color.LimeGreen)}");
                         break;
                     }
                     else
@@ -159,7 +189,6 @@ namespace FirstBankOfSuncoast
 
             UserMatches = true;
         }
-
 
     }
 }

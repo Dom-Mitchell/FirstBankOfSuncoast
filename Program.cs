@@ -196,45 +196,167 @@ namespace FirstBankOfSuncoast
                         Console.WriteLine("\nYour answer was invalid. Please try again!");
                         break;
                 }
+            }
 
+            // Database for Transactions
+            var databaseTransaction = new TransactionDatabase();
+            databaseTransaction.LoadTransactions();
+
+            PressAnyKey("\nPress Any Key to Login! ");
+
+            Console.Clear();
+            DisplayGreeting();
+
+            var promptAgain = true;
+
+            while (promptAgain)
+            {
                 if (databaseUser.UserMatches)
                 {
-                    PressAnyKey("\nPress Any Key to Login! ");
-
-                    Console.Clear();
-                    DisplayGreeting();
-
-                    // Database for Transactions
-                    var databaseTransaction = new TransactionDatabase();
-                    databaseTransaction.LoadTransactions();
-
-                    Console.Write($"\nWhat do you want to do?\n(W)ithdraw\n(D)eposit\n(T)ransfer\n(B)alance Inquiry\n(L)ist All Transactions\n(Q)uit\n: ");
+                    Console.Write($"\nWelcome, {databaseUser.SingularUser.UserName}!\n\nWhat do you want to do?\n(W)ithdraw\n(D)eposit\n(T)ransfer\n(B)alance Inquiry\n(L)ist All Transactions\n(Q)uit\n: ");
                     var loggedInChoices = Console.ReadLine().ToUpper();
 
                     switch (loggedInChoices)
                     {
                         case "W":
+                            Console.Clear();
+                            DisplayGreeting();
+                            Withdraw(databaseUser, databaseTransaction);
                             break;
                         case "D":
+                            Console.Clear();
+                            DisplayGreeting();
+                            Deposit(databaseUser, databaseTransaction);
                             break;
                         case "T":
+                            Console.Clear();
+                            DisplayGreeting();
+                            Transfer(databaseUser, databaseTransaction);
                             break;
                         case "B":
+                            Console.Clear();
+                            DisplayGreeting();
+                            BalaneInquiry(databaseUser, databaseTransaction);
                             break;
                         case "L":
+                            Console.Clear();
+                            DisplayGreeting();
+                            databaseTransaction.ListAllTransactions(databaseUser.SingularUser);
+                            break;
+                        case "Q":
+                            Console.WriteLine();
+                            promptAgain = false;
                             break;
                         default:
                             Console.WriteLine("\nYour answer was invalid. Please try again!");
                             break;
                     }
                 }
-
-
-
-
             }
 
+        }
 
+        private static void BalaneInquiry(UserDatabase user, TransactionDatabase transactions)
+        {
+            var correctChoice = false;
+            while (!correctChoice)
+            {
+                Console.WriteLine($"\nWould you like to view your Checking or Savings Account, {user.SingularUser.UserName}? (Checking/Savings) ");
+                var userSelection = Console.ReadLine().ToLower();
+
+                if (userSelection == "c" || userSelection == "checking")
+                {
+                    Console.WriteLine($"\nChecking Balance: ${transactions.checkingTotal(user.SingularUser)}");
+                    break;
+                }
+                else if (userSelection == "s" || userSelection == "savings")
+                {
+                    Console.WriteLine($"\nSavings Balance: ${transactions.savingsTotal(user.SingularUser)}");
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("\nYour answer was invalid. Please try again!");
+                }
+
+            }
+        }
+
+        private static void Transfer(UserDatabase user, TransactionDatabase transactions)
+        {
+            var correctChoice = false;
+            while (!correctChoice)
+            {
+                Console.WriteLine($"\nWould you like to transfer from your Checking or Savings Account, {user.SingularUser.UserName}? (Checking/Savings) ");
+                var userSelection = Console.ReadLine().ToLower();
+
+                if (userSelection == "c" || userSelection == "checking")
+                {
+                    transactions.TransferToSaving(user.SingularUser);
+                    break;
+                }
+                else if (userSelection == "s" || userSelection == "savings")
+                {
+                    transactions.TransferToChecking(user.SingularUser);
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("\nYour answer was invalid. Please try again!");
+                }
+
+            }
+        }
+
+        private static void Deposit(UserDatabase user, TransactionDatabase transactions)
+        {
+            var correctChoice = false;
+            while (!correctChoice)
+            {
+                Console.WriteLine($"\nWould you like to deposit to your Checking or Savings Account, {user.SingularUser.UserName}? (Checking/Savings) ");
+                var userSelection = Console.ReadLine().ToLower();
+
+                if (userSelection == "c" || userSelection == "checking")
+                {
+                    transactions.AddDepositToChecking(user.SingularUser);
+                    break;
+                }
+                else if (userSelection == "s" || userSelection == "savings")
+                {
+                    transactions.AddDepositToSavings(user.SingularUser);
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("\nYour answer was invalid. Please try again!");
+                }
+            }
+        }
+
+        private static void Withdraw(UserDatabase user, TransactionDatabase transactions)
+        {
+            var correctChoice = false;
+            while (!correctChoice)
+            {
+                Console.WriteLine($"\nWould you like to withdraw to your Checking or Savings Account, {user.SingularUser.UserName}? (Checking/Savings) ");
+                var userSelection = Console.ReadLine().ToLower();
+
+                if (userSelection == "c" || userSelection == "checking")
+                {
+                    transactions.AddWithdrawFromChecking(user.SingularUser);
+                    break;
+                }
+                else if (userSelection == "s" || userSelection == "savings")
+                {
+                    transactions.AddWithdrawFromSavings(user.SingularUser);
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("\nYour answer was invalid. Please try again!");
+                }
+
+            }
         }
     }
 }

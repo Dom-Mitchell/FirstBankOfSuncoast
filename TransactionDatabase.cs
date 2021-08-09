@@ -49,6 +49,16 @@ namespace FirstBankOfSuncoast
             return savingsBalance;
         }
 
+        public double checkingTotal(User user)
+        {
+            var depositSum = Transactions.Where(transaction => (transaction.Type == "Deposit" || transaction.Type == "Deposit to Transfer") && transaction.Name == user.UserName && transaction.Account == "Checking").Sum(transaction => transaction.Amount);
+            var withdrawalSum = Transactions.Where(transaction => (transaction.Type == "Withdraw" || transaction.Type == "Withdraw to Transfer") && transaction.Name == user.UserName && transaction.Account == "Checking").Sum(transaction => transaction.Amount);
+
+            var checkingBalance = depositSum - withdrawalSum;
+
+            return checkingBalance;
+        }
+
         public void AddDepositToSavings(User user)
         {
             var newTransaction = new Transaction();
@@ -60,7 +70,7 @@ namespace FirstBankOfSuncoast
             var madeDeposit = false;
             while (!madeDeposit)
             {
-                Console.WriteLine($"How much money would you like to Deposit to your Savings, {newTransaction.Name}?");
+                Console.WriteLine($"\nHow much money would you like to Deposit to your Savings Account, {user.UserName}? ");
 
                 var money = 0.0;
                 var isThisGoodInput = Double.TryParse(Console.ReadLine(), out money);
@@ -71,8 +81,46 @@ namespace FirstBankOfSuncoast
                     Transactions.Add(newTransaction);
                     SaveTransactions();
 
-                    Console.WriteLine($"Funds Deposited to {newTransaction.Name}'s Savings Account!");
-                    Console.WriteLine($"Savings Balance: {savingsTotal(user)}");
+                    Console.WriteLine($"\nFunds Deposited to {user.UserName}'s Savings Account!");
+                    Console.WriteLine($"Savings Balance: ${savingsTotal(user)}");
+                    break;
+
+                }
+                else
+                {
+                    Console.WriteLine("\nYour answer was invalid. Please try again!");
+                    Console.WriteLine("Your choice must be greater than 0");
+                }
+
+            }
+
+
+        }
+
+        public void AddDepositToChecking(User user)
+        {
+            var newTransaction = new Transaction();
+
+            newTransaction.Name = user.UserName;
+            newTransaction.Account = "Checking";
+            newTransaction.Type = "Deposit";
+
+            var madeDeposit = false;
+            while (!madeDeposit)
+            {
+                Console.WriteLine($"\nHow much money would you like to Deposit to your Checking Account, {user.UserName}? ");
+
+                var money = 0.0;
+                var isThisGoodInput = Double.TryParse(Console.ReadLine(), out money);
+
+                if (isThisGoodInput && money > 0)
+                {
+                    newTransaction.Amount = money;
+                    Transactions.Add(newTransaction);
+                    SaveTransactions();
+
+                    Console.WriteLine($"\nFunds Deposited to {user.UserName}'s Checking Account!");
+                    Console.WriteLine($"Checking Balance: ${checkingTotal(user)}");
                     break;
 
                 }
@@ -96,23 +144,31 @@ namespace FirstBankOfSuncoast
             newTransaction.Account = "Savings";
             newTransaction.Type = "Withdraw";
 
-            var madeDeposit = false;
-            while (!madeDeposit)
+            var madeWithdraw = false;
+            while (!madeWithdraw)
             {
-                Console.WriteLine($"How much money would you like to Withdraw from your Savings, {newTransaction.Name}?");
+                Console.WriteLine($"\nHow much money would you like to Withdraw from your Savings Account, {user.UserName}? ");
 
                 var money = 0.0;
                 var isThisGoodInput = Double.TryParse(Console.ReadLine(), out money);
 
                 if (isThisGoodInput && money > 0)
                 {
-                    newTransaction.Amount = money;
-                    Transactions.Add(newTransaction);
-                    SaveTransactions();
+                    if (((savingsTotal(user) - money) >= 0))
+                    {
+                        newTransaction.Amount = money;
+                        Transactions.Add(newTransaction);
+                        SaveTransactions();
 
-                    Console.WriteLine($"Funds Withdrawn from {newTransaction.Name}'s Savings Account!");
-                    Console.WriteLine($"Savings Balance: {savingsTotal(user)}");
-                    break;
+                        Console.WriteLine($"\nFunds Withdrawn from {user.UserName}'s Savings Account!");
+                        Console.WriteLine($"Savings Balance: ${savingsTotal(user)}");
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nYour answer was invalid. Please try again!");
+                        Console.WriteLine("SC Banking does not support overdraw at this time...");
+                    }
 
                 }
                 else
@@ -126,8 +182,159 @@ namespace FirstBankOfSuncoast
 
         }
 
+        public void AddWithdrawFromChecking(User user)
+        {
+            var newTransaction = new Transaction();
+
+            newTransaction.Name = user.UserName;
+            newTransaction.Account = "Checking";
+            newTransaction.Type = "Withdraw";
+
+            var madeWithdraw = false;
+            while (!madeWithdraw)
+            {
+                Console.WriteLine($"\nHow much money would you like to Withdraw from your Checking Account, {user.UserName}? ");
+
+                var money = 0.0;
+                var isThisGoodInput = Double.TryParse(Console.ReadLine(), out money);
+
+                if (isThisGoodInput && money > 0)
+                {
+                    if (((checkingTotal(user) - money) >= 0))
+                    {
+                        newTransaction.Amount = money;
+                        Transactions.Add(newTransaction);
+                        SaveTransactions();
+
+                        Console.WriteLine($"\nFunds Withdrawn from {user.UserName}'s Checking Account!");
+                        Console.WriteLine($"Checking Balance: ${checkingTotal(user)}");
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nYour answer was invalid. Please try again!");
+                        Console.WriteLine("SC Banking does not support overdraw at this time...");
+                    }
+
+                }
+                else
+                {
+                    Console.WriteLine("\nYour answer was invalid. Please try again!");
+                    Console.WriteLine("Your choice must be greater than 0");
+                }
+
+            }
+
+
+        }
+
+        public void TransferToChecking(User user)
+        {
+            var madeTransfer = false;
+            while (madeTransfer)
+            {
+                Console.WriteLine($"\nHow much money would you like to Transfer from your Savings into your Checking Account, {user.UserName}? ");
+
+                var money = 0.0;
+                var isThisGoodInput = Double.TryParse(Console.ReadLine(), out money);
+
+                if (isThisGoodInput && money > 0)
+                {
+                    if (((savingsTotal(user) - money) >= 0))
+                    {
+                        var newTransaction = new Transaction();
+                        newTransaction.Name = user.UserName;
+                        newTransaction.Account = "Savings";
+                        newTransaction.Type = "Withdraw to Transfer";
+                        newTransaction.Amount = money;
+                        Transactions.Add(newTransaction);
+                        SaveTransactions();
+
+                        Console.WriteLine($"Funds Withdrawn from {user.UserName}'s Savings Account");
+
+                        var secondTransaction = new Transaction();
+                        secondTransaction.Name = user.UserName;
+                        secondTransaction.Account = "Checking";
+                        secondTransaction.Type = "Deposit to Transfer";
+                        secondTransaction.Amount = money;
+                        Transactions.Add(secondTransaction);
+                        SaveTransactions();
+
+                        Console.WriteLine($"Funds Deposited to {user.UserName}'s Checking Account.");
+                        Console.WriteLine($"Checking Balance: ${checkingTotal(user)}");
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nYour answer was invalid. Please try again!");
+                        Console.WriteLine("SC Banking does not support overdraw at this time...");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("\nYour answer was invalid. Please try again!");
+                    Console.WriteLine("Your choice must be greater than 0");
+                }
+
+            }
+
+        }
+
+        public void TransferToSaving(User user)
+        {
+            var madeTransfer = false;
+            while (madeTransfer)
+            {
+                Console.WriteLine($"\nHow much money would you like to Transfer from your Checking into your Savings Account, {user.UserName}? ");
+
+                var money = 0.0;
+                var isThisGoodInput = Double.TryParse(Console.ReadLine(), out money);
+
+                if (isThisGoodInput && money > 0)
+                {
+                    if (((checkingTotal(user) - money) >= 0))
+                    {
+                        var newTransaction = new Transaction();
+                        newTransaction.Name = user.UserName;
+                        newTransaction.Account = "Checking";
+                        newTransaction.Type = "Withdraw to Transfer";
+                        newTransaction.Amount = money;
+                        Transactions.Add(newTransaction);
+                        SaveTransactions();
+
+                        Console.WriteLine($"Funds Withdrawn from {user.UserName}'s Checking Account");
+
+                        var secondTransaction = new Transaction();
+                        secondTransaction.Name = user.UserName;
+                        secondTransaction.Account = "Savings";
+                        secondTransaction.Type = "Deposit to Transfer";
+                        secondTransaction.Amount = money;
+                        Transactions.Add(secondTransaction);
+                        SaveTransactions();
+
+                        Console.WriteLine($"Funds Deposited to {user.UserName}'s Savings Account.");
+                        Console.WriteLine($"Savings Balance: ${checkingTotal(user)}");
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nYour answer was invalid. Please try again!");
+                        Console.WriteLine("SC Banking does not support overdraw at this time...");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("\nYour answer was invalid. Please try again!");
+                    Console.WriteLine("Your choice must be greater than 0");
+                }
+
+            }
+
+        }
+
         public void ListAllTransactions(User user)
         {
+            Console.WriteLine();
             foreach (var Transaction in Transactions.Where(Transaction => Transaction.Name == user.UserName))
             {
                 Console.WriteLine(Transaction.Description());

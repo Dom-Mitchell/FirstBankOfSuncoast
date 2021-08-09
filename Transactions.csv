@@ -1,0 +1,10 @@
+Name,Account,Type,Amount,TimeStamp
+DomZon,Checking,Deposit,12000,01/01/0001 00:00:00
+DomZon,Checking,Deposit,1,01/01/0001 00:00:00
+DomZon,Checking,Deposit,0.34,08/09/2021 14:50:18
+DomZon,Checking,Withdraw,12,08/09/2021 15:25:54
+DomZon,Checking,Withdraw,12,08/09/2021 15:26:55
+DomZon,Checking,Withdraw,12,08/09/2021 15:28:48
+DomZon,Checking,Deposit,12,08/09/2021 15:28:57
+DomZon,Savings,Deposit,12000,08/09/2021 15:29:53
+DomZon,Checking,Withdraw,12,08/09/2021 18:39:01
