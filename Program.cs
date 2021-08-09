@@ -28,162 +28,142 @@ namespace FirstBankOfSuncoast
             Console.WriteLine($"{"############################################################################################################".Pastel(Color.LightSlateGray)}");
         }
 
-        static string PromptForString(string prompt)
+        // static string PromptForString(string prompt)
+        // {
+        //     Console.Write(prompt);
+        //     var userInput = Console.ReadLine();
+
+        //     return userInput;
+        // }
+
+        // static int PromptForInteger(string prompt)
+        // {
+        //     Console.Write(prompt);
+        //     int userInput;
+        //     var isThisGoodInput = Int32.TryParse(Console.ReadLine(), out userInput);
+
+        //     if (isThisGoodInput)
+        //     {
+        //         return userInput;
+        //     }
+        //     else
+        //     {
+        //         Console.WriteLine("Sorry, that isn't a valid input, I'm using 0 as your answer.");
+        //         return 0;
+        //     }
+        // }
+
+        // static double PromptForDouble(string prompt)
+        // {
+        //     Console.Write(prompt);
+        //     double userInput;
+        //     var isThisGoodInput = Double.TryParse(Console.ReadLine(), out userInput);
+
+        //     if (isThisGoodInput)
+        //     {
+        //         return userInput;
+        //     }
+        //     else
+        //     {
+        //         Console.WriteLine("Sorry, that isn't a valid input, I'm using 0.0 as your answer.");
+        //         return 0;
+        //     }
+        // }
+
+        // private static void AddUser(UserDatabase database)
+        // {
+        //     var user = new User();
+        //     var correctPinLength = false;
+        //     var correctUserNameLength = false;
+
+
+
+        //     while (!correctPinLength)
+        //     {
+
+        //     }
+
+
+        //     database.AddUser(user);
+        //     database.SaveUsers();
+        // }
+
+        // private static string ExistingUser(UserDatabase database)
+        // {
+        //     var userNameToSearchFor = PromptForString("\nWhat is your username? ");
+        //     //var passwordToSearchFor = PromptForInteger("What is your pin number? ");
+
+        //     database.UserExists(userNameToSearchFor);
+        //     //newMenu();
+        //     return userNameToSearchFor;
+        //     // var passwordToSearchFor = PromptForInteger("What is your pin number? ");
+        //     // database.UserPassWordExists(passwordToSearchFor);
+
+        //     //var user = new User();
+        //     // database.UserNameExists(userNameToSearchFor);
+
+        // }
+
+        // static void newMenu(string usersName)
+        // {
+        //     Console.Clear();
+        //     DisplayGreeting();
+
+        //     var keepGoing = true;
+
+        //     var databaseTransaction = new TransactionDatabase();
+
+        //     while (keepGoing)
+        //     {
+        //         Console.Write("\nWhat do you want to do?\n(W)ithdraw\n(D)eposit\n(B)alance Inquiry\n(Q)uit\n: ");
+        //         var choice = Console.ReadLine().ToUpper();
+
+        //         switch (choice)
+        //         {
+        //             case "W":
+        //                 break;
+        //             case "D":
+        //                 makeDeposit(databaseTransaction, usersName);
+        //                 break;
+        //             case "B":
+        //                 break;
+        //             case "Q":
+        //                 Console.WriteLine();
+        //                 keepGoing = false;
+        //                 break;
+        //             default:
+        //                 Console.WriteLine("\nYour answer was invalid. Please try again!");
+        //                 break;
+        //         }
+        //     }
+
+        // }
+
+        // static void makeDeposit(TransactionDatabase database, string usersName)
+        // {
+        //     var transacion = new Transaction();
+
+        //     transacion.Name = $"{usersName}";
+        //     transacion.Account = PromptForString("Is this your Checking or Savings Account? ");
+        //     transacion.Type = "Deposit";
+        //     transacion.Amount = PromptForDouble("How much money would you like to add? ");
+        //     transacion.TimeStamp = DateTime.Now;
+
+        //     database.AddTransaction(transacion);
+        //     database.SaveTransactions();
+        // }
+
+        static char PressAnyKey(string prompt)
         {
-            Console.Write(prompt);
-            var userInput = Console.ReadLine();
-
-            return userInput;
-        }
-
-        static int PromptForInteger(string prompt)
-        {
-            Console.Write(prompt);
-            int userInput;
-            var isThisGoodInput = Int32.TryParse(Console.ReadLine(), out userInput);
-
-            if (isThisGoodInput)
-            {
-                return userInput;
-            }
-            else
-            {
-                Console.WriteLine("Sorry, that isn't a valid input, I'm using 0 as your answer.");
-                return 0;
-            }
-        }
-
-        static double PromptForDouble(string prompt)
-        {
-            Console.Write(prompt);
-            double userInput;
-            var isThisGoodInput = Double.TryParse(Console.ReadLine(), out userInput);
-
-            if (isThisGoodInput)
-            {
-                return userInput;
-            }
-            else
-            {
-                Console.WriteLine("Sorry, that isn't a valid input, I'm using 0.0 as your answer.");
-                return 0;
-            }
-        }
-
-        private static void AddUser(UserDatabase database)
-        {
-            var user = new User();
-            var correctPinLength = false;
-            var correctUserNameLength = false;
-
-            while (!correctUserNameLength)
-            {
-                user.UserName = PromptForString("\nWhat do you want to be your username? (8 Characters max) ");
-
-                if (user.UserName.Length <= 8)
-                {
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("\nYour answer was invalid. Please try again!");
-                    Console.WriteLine("Your choice must be a maximum of 8 characters long");
-                }
-            }
-
-            while (!correctPinLength)
-            {
-                user.Password = PromptForInteger("What do you want your pin to be? (####) ");
-
-                if (user.Password.ToString().Length == 4)
-                {
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("\nYour answer was invalid. Please try again!");
-                    Console.WriteLine("Your choice must be 4 characters long");
-                }
-            }
-
-
-            database.AddUser(user);
-            database.SaveUsers();
-        }
-
-        private static string ExistingUser(UserDatabase database)
-        {
-            var userNameToSearchFor = PromptForString("\nWhat is your username? ");
-            //var passwordToSearchFor = PromptForInteger("What is your pin number? ");
-
-            database.UserExists(userNameToSearchFor);
-            //newMenu();
-            return userNameToSearchFor;
-            // var passwordToSearchFor = PromptForInteger("What is your pin number? ");
-            // database.UserPassWordExists(passwordToSearchFor);
-
-            //var user = new User();
-            // database.UserNameExists(userNameToSearchFor);
-
-        }
-
-        static void newMenu(string usersName)
-        {
-            Console.Clear();
-            DisplayGreeting();
-
-            var keepGoing = true;
-
-            var databaseTransaction = new TransactionDatabase();
-
-            while (keepGoing)
-            {
-                Console.Write("\nWhat do you want to do?\n(W)ithdraw\n(D)eposit\n(B)alance Inquiry\n(Q)uit\n: ");
-                var choice = Console.ReadLine().ToUpper();
-
-                switch (choice)
-                {
-                    case "W":
-                        break;
-                    case "D":
-                        makeDeposit(databaseTransaction, usersName);
-                        break;
-                    case "B":
-                        break;
-                    case "Q":
-                        Console.WriteLine();
-                        keepGoing = false;
-                        break;
-                    default:
-                        Console.WriteLine("\nYour answer was invalid. Please try again!");
-                        break;
-                }
-            }
-
-        }
-
-        static void makeDeposit(TransactionDatabase database, string usersName)
-        {
-            var transacion = new Transaction();
-
-            transacion.Name = $"{usersName}";
-            transacion.Account = PromptForString("Is this your Checking or Savings Account? ");
-            transacion.Type = "Deposit";
-            transacion.Amount = PromptForDouble("How much money would you like to add? ");
-            transacion.TimeStamp = DateTime.Now;
-
-            database.AddTransaction(transacion);
-            database.SaveTransactions();
+            Console.WriteLine(prompt);
+            var keyPressed = Console.ReadKey().KeyChar;
+            return keyPressed;
         }
 
 
         static void Main(string[] args)
         {
             //Console.WriteLine("Welcome to C#");
-
-            // Database for Transactions
-            var databaseTransaction = new TransactionDatabase();
-            databaseTransaction.LoadTransactions();
 
             // Database for Users
             var databaseUser = new UserDatabase();
@@ -195,20 +175,18 @@ namespace FirstBankOfSuncoast
             var keepGoing = true;
 
             // While the user hasn't said QUIT yet
-            while (keepGoing)
+            while (keepGoing && !databaseUser.UserMatches)
             {
                 Console.Write("\nWhat do you want to do?\n(C)reate Account\n(L)ogin to Account\n(Q)uit\n: ");
-                var choice = Console.ReadLine().ToUpper();
+                var choices = Console.ReadLine().ToUpper();
 
-                switch (choice)
+                switch (choices)
                 {
                     case "C":
-                        AddUser(databaseUser);
+                        databaseUser.CreateUser();
                         break;
                     case "L":
-                        ExistingUser(databaseUser);
-                        newMenu(ExistingUser(databaseUser));
-                        keepGoing = false;
+                        databaseUser.ExistingUser();
                         break;
                     case "Q":
                         Console.WriteLine();
@@ -218,7 +196,41 @@ namespace FirstBankOfSuncoast
                         Console.WriteLine("\nYour answer was invalid. Please try again!");
                         break;
                 }
-                //break;
+
+                if (databaseUser.UserMatches)
+                {
+                    PressAnyKey("\nPress Any Key to Login! ");
+
+                    Console.Clear();
+                    DisplayGreeting();
+
+                    // Database for Transactions
+                    var databaseTransaction = new TransactionDatabase();
+                    databaseTransaction.LoadTransactions();
+
+                    Console.Write($"\nWhat do you want to do?\n(W)ithdraw\n(D)eposit\n(T)ransfer\n(B)alance Inquiry\n(L)ist All Transactions\n(Q)uit\n: ");
+                    var loggedInChoices = Console.ReadLine().ToUpper();
+
+                    switch (loggedInChoices)
+                    {
+                        case "W":
+                            break;
+                        case "D":
+                            break;
+                        case "T":
+                            break;
+                        case "B":
+                            break;
+                        case "L":
+                            break;
+                        default:
+                            Console.WriteLine("\nYour answer was invalid. Please try again!");
+                            break;
+                    }
+                }
+
+
+
 
             }
 

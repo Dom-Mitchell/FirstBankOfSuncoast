@@ -10,9 +10,10 @@ namespace FirstBankOfSuncoast
     class UserDatabase
     {
         private List<User> Users { get; set; } = new List<User>();
+        public User SingularUser = new User();
+        public bool UserMatches = false;
 
         private string FileName = "Users.csv";
-
 
         public void LoadUsers()
         {
@@ -40,122 +41,223 @@ namespace FirstBankOfSuncoast
             fileWriter.Close();
         }
 
-        // CREATE Add User
-        public void AddUser(User newUser)
+        public void CreateUser()
         {
-            Users.Add(newUser);
-        }
+            var correctUserNameLength = false;
+            var correctPinLength = false;
 
-        public User FindOneUser(string nameToFind)
-        {
-            User foundUser = Users.FirstOrDefault(user => user.UserName.ToUpper().Contains(nameToFind.ToUpper()));
+            var newUserName = "";
+            var newPin = 0;
 
-            return foundUser;
-        }
-
-        public void UserExists(string nameToFind)
-        {
-            var foundUserName = Users.Any(user => user.UserName.Equals(nameToFind));
-            var notUserName = false;
-            var noLongEnough = false;
-
-            while (!notUserName)
+            while (!correctUserNameLength)
             {
+                Console.WriteLine("\nWhat do you want to be your username? (8 Characters max) ");
+                newUserName = Console.ReadLine();
 
-                if (foundUserName)
+                if (newUserName.Length <= 8)
                 {
-
-                    while (!noLongEnough)
+                    if (Users.Any(user => user.UserName == newUserName))
                     {
-                        Console.WriteLine("User found!");
-                        Console.WriteLine($"What is you pin number, {nameToFind}? ");
-
-
-                        var usersPassword = Console.ReadLine();
-                        if (usersPassword.Length == 4)
-                        {
-                            var user = Users.First(user => user.Password == Int32.Parse(usersPassword));
-                            //var foundUserPassword = Users.Where(user => user.Password.Equals(usersPassword));
-                            if (Int32.Parse(usersPassword) == user.Password)
-                            {
-                                Console.WriteLine("User pin matches!");
-                                Console.WriteLine("\n\n\n\n\n\n\n\nVerifying...");
-                                break;
-                            }
-                            else
-                            {
-                                Console.WriteLine("Your password is NOT correct!\nPlease try again!");
-                                break;
-                            }
-
-                            //break;
-                        }
-                        else
-                        {
-                            Console.WriteLine("\nYour answer was invalid. Please try again!");
-                            Console.WriteLine("Your choice must be 4 characters long");
-                        }
-
+                        Console.WriteLine("That username is taken. Please Try again!");
+                        Console.WriteLine("Your choice must be a maximum of 8 characters long");
+                        continue;
                     }
-
-
                     break;
-                    // return foundUserName.ToString();
                 }
                 else
                 {
-                    Console.WriteLine("Your username is NOT correct!\nPlease try again!");
-                    // return null;
-                    break;
+                    Console.WriteLine("\nYour answer was invalid. Please try again!");
+                    Console.WriteLine("Your choice must be a maximum of 8 characters long");
                 }
             }
-            //var foundUserPassword = Users.Any(user => user.Password.Equals(passwordToFind) == user.Password.Equals(nameToFind));
 
-            // while (!notUserPassword)
-            // {
+            while (!correctPinLength)
+            {
+                Console.WriteLine("What do you want your pin to be? (4 numbers, ####) ");
+                newPin = Int32.Parse(Console.ReadLine());
 
+                if (newPin.ToString().Length == 4)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("\nYour answer was invalid. Please try again!");
+                    Console.WriteLine("Your choice must be 4 numbers long");
+                }
+            }
 
+            SingularUser.UserName = newUserName;
+            SingularUser.Password = newPin;
 
-            //     if (foundUserName)
-            //     {
-            //         Console.WriteLine("Password found!");
-            //         notUserPassword = true;
-            //         // break;
-            //     }
-            //     else
-            //     {
-            //         Console.WriteLine("Your password is NOT correct!\nPlease try again!");
-            //         notUserPassword = false;
-            //         // break;
-            //     }
-            // }
+            Users.Add(SingularUser);
+            SaveUsers();
 
-            // return null;
-
-            //var userExists = Users.Contains(Users.UserName(nameToFind));
         }
 
-        // public void UserPassWordExists(int passwordToFind)
-        // {
-        //     var notUserPassword = false;
-        //     // while (!notUserPassword)
-        //     // {
+        public void ExistingUser()
+        {
+            var correctUserNameLength = false;
+            var correctPinLength = false;
 
-        //     //     var foundUserName = Users.Any(user => user.Password.Equals(passwordToFind));
+            var existingUserName = "";
 
-        //     //     if (foundUserName)
-        //     //     {
-        //     //         Console.WriteLine("Password found!");
-        //     //         break;
-        //     //     }
-        //     //     else
-        //     //     {
-        //     //         Console.WriteLine("Your password is NOT correct!\nPlease try again!");
-        //     //         break;
-        //     //     }
-        //     // }
+            while (!correctUserNameLength)
+            {
+                Console.Write("\nPlease enter your username (8 Characters max) ");
+                existingUserName = Console.ReadLine();
 
-        //     //var userExists = Users.Contains(Users.UserName(nameToFind));
-        // }
+                if (existingUserName.Length <= 8)
+                {
+                    if (Users.Any(user => user.UserName == existingUserName))
+                    {
+                        Console.Write("User found!\n");
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Incorrect username. Please try again!");
+                        Console.WriteLine("Your choice must be a maximum of 8 characters long");
+                    }
+
+                }
+                else
+                {
+                    Console.WriteLine("Your answer was invalid. Please try again!");
+                    Console.WriteLine("Your choice must be a maximum of 8 characters long");
+                }
+
+
+            }
+
+            while (!correctPinLength)
+            {
+                Console.WriteLine("\nPlease enter your pin number (4 numbers, ####) ");
+                var existingPassword = Console.ReadLine();
+
+                if (existingPassword.Length == 4)
+                {
+                    SingularUser = Users.First(user => user.UserName == existingUserName);
+                    if (SingularUser.Password.ToString() == existingPassword)
+                    {
+                        Console.WriteLine("Password correct!");
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Incorrect password. Please try again!");
+                        Console.WriteLine("Your choice must be 4 numbers long");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("\nYour answer was invalid. Please try again!");
+                    Console.WriteLine("Your choice must be 4 numbers long");
+                }
+
+            }
+
+            UserMatches = true;
+        }
+
+
     }
 }
+
+
+
+//     if (foundUserName)
+//     {
+
+//         while (!noLongEnough)
+//         {
+//             Console.WriteLine("User found!");
+//             Console.WriteLine($"What is you pin number, {nameToFind}? ");
+
+
+//             var usersPassword = Console.ReadLine();
+//             if (usersPassword.Length == 4)
+//             {
+//                 var user = Users.First(user => user.Password == Int32.Parse(usersPassword));
+//                 //var foundUserPassword = Users.Where(user => user.Password.Equals(usersPassword));
+//                 if (Int32.Parse(usersPassword) == user.Password)
+//                 {
+//                     Console.WriteLine("User pin matches!");
+//                     Console.WriteLine("Verifying...\n\n\n\n\n\n");
+//                     break;
+//                 }
+//                 else
+//                 {
+//                     Console.WriteLine("Your password is NOT correct!\nPlease try again!");
+//                     break;
+//                 }
+
+//                 //break;
+//             }
+//             else
+//             {
+//                 Console.WriteLine("\nYour answer was invalid. Please try again!");
+//                 Console.WriteLine("Your choice must be 4 characters long");
+//             }
+
+//         }
+
+
+//         break;
+//         // return foundUserName.ToString();
+//     }
+//     else
+//     {
+//         Console.WriteLine("Your username is NOT correct!\nPlease try again!");
+//         // return null;
+//         break;
+//     }
+// }
+//var foundUserPassword = Users.Any(user => user.Password.Equals(passwordToFind) == user.Password.Equals(nameToFind));
+
+// while (!notUserPassword)
+// {
+
+
+
+//     if (foundUserName)
+//     {
+//         Console.WriteLine("Password found!");
+//         notUserPassword = true;
+//         // break;
+//     }
+//     else
+//     {
+//         Console.WriteLine("Your password is NOT correct!\nPlease try again!");
+//         notUserPassword = false;
+//         // break;
+//     }
+// }
+
+// return null;
+
+//var userExists = Users.Contains(Users.UserName(nameToFind));
+// }
+
+// public void UserPassWordExists(int passwordToFind)
+// {
+//     var notUserPassword = false;
+//     // while (!notUserPassword)
+//     // {
+
+//     //     var foundUserName = Users.Any(user => user.Password.Equals(passwordToFind));
+
+//     //     if (foundUserName)
+//     //     {
+//     //         Console.WriteLine("Password found!");
+//     //         break;
+//     //     }
+//     //     else
+//     //     {
+//     //         Console.WriteLine("Your password is NOT correct!\nPlease try again!");
+//     //         break;
+//     //     }
+//     // }
+
+//     //var userExists = Users.Contains(Users.UserName(nameToFind));
+// }
