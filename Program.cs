@@ -167,6 +167,10 @@ namespace FirstBankOfSuncoast
         //     database.SaveTransactions();
         // }
 
+        // public static void Exit()
+        // {
+        // }
+
         static char PressAnyKey(string prompt)
         {
             Console.WriteLine(prompt);
@@ -288,6 +292,7 @@ namespace FirstBankOfSuncoast
                     case "Q":
                         Console.Clear();
                         DisplayExit();
+                        Environment.Exit(0);
                         keepGoing = false;
                         break;
                     default:
@@ -340,17 +345,16 @@ namespace FirstBankOfSuncoast
                 if (userSelection == "c" || userSelection == "checking")
                 {
                     transactions.TransferToSaving(user.SingularUser);
-                    break;
                 }
                 else if (userSelection == "s" || userSelection == "savings")
                 {
                     transactions.TransferToChecking(user.SingularUser);
-                    break;
                 }
                 else
                 {
                     Console.WriteLine($"\n{"Your answer was invalid. Please try again!".Pastel(Color.Red)}");
                 }
+                break;
 
             }
         }
