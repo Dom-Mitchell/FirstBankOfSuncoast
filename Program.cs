@@ -28,6 +28,20 @@ namespace FirstBankOfSuncoast
             Console.WriteLine($"{"############################################################################################################".Pastel(Color.LightSlateGray)}");
         }
 
+        static void DisplayExit()
+        {
+            // Ascii text from https://www.ascii-art-generator.org/
+            Console.WriteLine($"{"#######                             ".Pastel(Color.LightSkyBlue)}  {" #     #               ###  ".Pastel(Color.SeaGreen)}{@"            \       |         /         ".Pastel(Color.OrangeRed)}");
+            Console.WriteLine($"{"   #    #    #   ##   #    # #    # ".Pastel(Color.LightSkyBlue)}  {"  #   #   ####  #    # ###  ".Pastel(Color.SeaGreen)}{@"  .          .      |        .        . ".Pastel(Color.OrangeRed)}");
+            Console.WriteLine($"{"   #    #    #  #  #  ##   # #   #  ".Pastel(Color.LightSkyBlue)}  {"   # #   #    # #    # ###  ".Pastel(Color.SeaGreen)}{@"    .         \             /       .   ".Pastel(Color.OrangeRed)}");
+            Console.WriteLine($"{"   #    ###### #    # # #  # ####   ".Pastel(Color.LightSkyBlue)}  {"    #    #    # #    #  #   ".Pastel(Color.SeaGreen)}{@"      '  .     \    |      /      .     ".Pastel(Color.OrangeRed)}");
+            Console.WriteLine($"{"   #    #    # ###### #  # # #  #   ".Pastel(Color.LightSkyBlue)}  {"    #    #    # #    #      ".Pastel(Color.SeaGreen)}{@"            .".Pastel(Color.OrangeRed)} {" ,+~'`^`'~+,".Pastel(Color.DarkOrange)}{@"/   , '".Pastel(Color.OrangeRed)}");
+            Console.WriteLine($"{"   #    #    # #    # #   ## #   #  ".Pastel(Color.LightSkyBlue)}  {"    #    #    # #    # ###  ".Pastel(Color.SeaGreen)}{@"             .'           '.".Pastel(Color.DarkOrange)}{"'".Pastel(Color.OrangeRed)}");
+            Console.WriteLine($"{"   #    #    # #    # #    # #    # ".Pastel(Color.LightSkyBlue)}  {"    #     ####   ####  ###  ".Pastel(Color.SeaGreen)}{@"   --- -- -".Pastel(Color.OrangeRed)} {@"/               \".Pastel(Color.DarkOrange)} {"- -- ---  ".Pastel(Color.OrangeRed)}\n");
+            Console.WriteLine($"{"############################################################################################################".Pastel(Color.LightSlateGray)}");
+            Console.WriteLine($"{"############################################################################################################".Pastel(Color.LightSlateGray)}");
+        }
+
         // static string PromptForString(string prompt)
         // {
         //     Console.Write(prompt);
@@ -165,6 +179,8 @@ namespace FirstBankOfSuncoast
         {
             //Console.WriteLine("Welcome to C#");
 
+            // DisplayExit();
+
             UserDatabase databaseUser = MainMenu();
             LoggedInMenu(databaseUser);
 
@@ -224,7 +240,8 @@ namespace FirstBankOfSuncoast
                             databaseUser = MainMenu();
                             break;
                         case "Q":
-                            Console.WriteLine();
+                            Console.Clear();
+                            DisplayExit();
                             promptAgain = false;
                             break;
                         default:
@@ -269,7 +286,8 @@ namespace FirstBankOfSuncoast
                         PressAnyKey("\nPress Any Key to Continue! ");
                         break;
                     case "Q":
-                        Console.WriteLine();
+                        Console.Clear();
+                        DisplayExit();
                         keepGoing = false;
                         break;
                     default:
