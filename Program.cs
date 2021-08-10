@@ -165,47 +165,16 @@ namespace FirstBankOfSuncoast
         {
             //Console.WriteLine("Welcome to C#");
 
-            // Database for Users
-            var databaseUser = new UserDatabase();
-            databaseUser.LoadUsers();
+            UserDatabase databaseUser = MainMenu();
+            LoggedInMenu(databaseUser);
 
-            Console.Clear();
-            DisplayGreeting();
+        }
 
-            var keepGoing = true;
-
-            // While the user hasn't said QUIT yet
-            while (keepGoing && !databaseUser.UserMatches)
-            {
-                Console.Write("\nWhat do you want to do?\n(C)reate Account\n(L)ogin to Account\n(Q)uit\n: ");
-                var choices = Console.ReadLine().ToUpper();
-
-                switch (choices)
-                {
-                    case "C":
-                        databaseUser.CreateUser();
-                        break;
-                    case "L":
-                        databaseUser.ExistingUser();
-                        break;
-                    case "Q":
-                        Console.WriteLine();
-                        keepGoing = false;
-                        break;
-                    default:
-                        Console.WriteLine("\nYour answer was invalid. Please try again!");
-                        break;
-                }
-            }
-
+        private static void LoggedInMenu(UserDatabase databaseUser)
+        {
             // Database for Transactions
             var databaseTransaction = new TransactionDatabase();
             databaseTransaction.LoadTransactions();
-
-            PressAnyKey("\nPress Any Key to Login! ");
-
-            Console.Clear();
-            DisplayGreeting();
 
             var promptAgain = true;
 
@@ -213,7 +182,10 @@ namespace FirstBankOfSuncoast
             {
                 if (databaseUser.UserMatches)
                 {
-                    Console.Write($"\nWelcome, {databaseUser.SingularUser.UserName}!\n\nWhat do you want to do?\n(W)ithdraw\n(D)eposit\n(T)ransfer\n(B)alance Inquiry\n(L)ist All Transactions\n(Q)uit\n: ");
+                    Console.Clear();
+                    DisplayGreeting();
+
+                    Console.Write($"\nWelcome, {databaseUser.SingularUser.UserName}!\n\nWhat do you want to do?\n(W)withdrawn\n(D)eposes\n(T)ransfer\n(B)alyce Inquiry\n(L)ist All Transactions\n(S)ign Out\n(Q)uit\n: ");
                     var loggedInChoices = Console.ReadLine().ToUpper();
 
                     switch (loggedInChoices)
@@ -243,17 +215,59 @@ namespace FirstBankOfSuncoast
                             DisplayGreeting();
                             databaseTransaction.ListAllTransactions(databaseUser.SingularUser);
                             break;
+                        case "S":
+                            databaseUser = MainMenu();
+                            break;
                         case "Q":
                             Console.WriteLine();
                             promptAgain = false;
                             break;
                         default:
-                            Console.WriteLine("\nYour answer was invalid. Please try again!");
+                            Console.WriteLine($"\n{"Your answer was invalid. Please try again!".Pastel(Color.Red)}");
                             break;
                     }
                 }
+                PressAnyKey("\nPress Any Key to Continue! ");
+            }
+        }
+
+        private static UserDatabase MainMenu()
+        {
+            // Database for Users
+            var databaseUser = new UserDatabase();
+            databaseUser.LoadUsers();
+
+            var keepGoing = true;
+
+            // While the user hasn't said QUIT yet
+            while (keepGoing && !databaseUser.UserMatches)
+            {
+                Console.Clear();
+                DisplayGreeting();
+
+                Console.Write("\nWhat do you want to do?\n(C)reate Account\n(L)ogin to Account\n(Q)uit\n: ");
+                var choices = Console.ReadLine().ToUpper();
+
+                switch (choices)
+                {
+                    case "C":
+                        databaseUser.CreateUser();
+                        break;
+                    case "L":
+                        databaseUser.ExistingUser();
+                        break;
+                    case "Q":
+                        Console.WriteLine();
+                        keepGoing = false;
+                        break;
+                    default:
+                        Console.WriteLine($"\n{"Your answer was invalid. Please try again!".Pastel(Color.Red)}");
+                        break;
+                }
+                PressAnyKey("\nPress Any Key to Continue! ");
             }
 
+            return databaseUser;
         }
 
         private static void BalaneInquiry(UserDatabase user, TransactionDatabase transactions)
@@ -276,7 +290,7 @@ namespace FirstBankOfSuncoast
                 }
                 else
                 {
-                    Console.WriteLine("\nYour answer was invalid. Please try again!");
+                    Console.WriteLine($"\n{"Your answer was invalid. Please try again!".Pastel(Color.Red)}");
                 }
 
             }
@@ -302,7 +316,7 @@ namespace FirstBankOfSuncoast
                 }
                 else
                 {
-                    Console.WriteLine("\nYour answer was invalid. Please try again!");
+                    Console.WriteLine($"\n{"Your answer was invalid. Please try again!".Pastel(Color.Red)}");
                 }
 
             }
@@ -328,7 +342,7 @@ namespace FirstBankOfSuncoast
                 }
                 else
                 {
-                    Console.WriteLine("\nYour answer was invalid. Please try again!");
+                    Console.WriteLine($"\n{"Your answer was invalid. Please try again!".Pastel(Color.Red)}");
                 }
             }
         }
@@ -353,7 +367,7 @@ namespace FirstBankOfSuncoast
                 }
                 else
                 {
-                    Console.WriteLine("\nYour answer was invalid. Please try again!");
+                    Console.WriteLine($"\n{"Your answer was invalid. Please try again!".Pastel(Color.Red)}");
                 }
 
             }

@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using CsvHelper;
+using Pastel;
 
 namespace FirstBankOfSuncoast
 {
@@ -88,8 +90,8 @@ namespace FirstBankOfSuncoast
                 }
                 else
                 {
-                    Console.WriteLine("\nYour answer was invalid. Please try again!");
-                    Console.WriteLine("Your choice must be greater than 0");
+                    Console.WriteLine($"\n{"Your answer was invalid. Please try again!".Pastel(Color.Red)}");
+                    Console.WriteLine($"{"Your choice must be greater than 0".Pastel(Color.Red)}");
                 }
 
             }
@@ -126,8 +128,8 @@ namespace FirstBankOfSuncoast
                 }
                 else
                 {
-                    Console.WriteLine("\nYour answer was invalid. Please try again!");
-                    Console.WriteLine("Your choice must be greater than 0");
+                    Console.WriteLine($"\n{"Your answer was invalid. Please try again!".Pastel(Color.Red)}");
+                    Console.WriteLine($"{"Your choice must be greater than 0".Pastel(Color.Red)}");
                 }
 
             }
@@ -166,15 +168,15 @@ namespace FirstBankOfSuncoast
                     }
                     else
                     {
-                        Console.WriteLine("\nYour answer was invalid. Please try again!");
-                        Console.WriteLine("SC Banking does not support overdraw at this time...");
+                        Console.WriteLine($"\n{"Your answer was invalid. Please try again!".Pastel(Color.Red)}");
+                        Console.WriteLine($"{"SC Banking does not support overdraw at this time...".Pastel(Color.Red)}");
                     }
 
                 }
                 else
                 {
-                    Console.WriteLine("\nYour answer was invalid. Please try again!");
-                    Console.WriteLine("Your choice must be greater than 0");
+                    Console.WriteLine($"\n{"Your answer was invalid. Please try again!".Pastel(Color.Red)}");
+                    Console.WriteLine($"{"Your choice must be greater than 0".Pastel(Color.Red)}");
                 }
 
             }
@@ -212,15 +214,15 @@ namespace FirstBankOfSuncoast
                     }
                     else
                     {
-                        Console.WriteLine("\nYour answer was invalid. Please try again!");
-                        Console.WriteLine("SC Banking does not support overdraw at this time...");
+                        Console.WriteLine($"\n{"Your answer was invalid. Please try again!".Pastel(Color.Red)}");
+                        Console.WriteLine($"{"SC Banking does not support overdraw at this time...".Pastel(Color.Red)}");
                     }
 
                 }
                 else
                 {
-                    Console.WriteLine("\nYour answer was invalid. Please try again!");
-                    Console.WriteLine("Your choice must be greater than 0");
+                    Console.WriteLine($"\n{"Your answer was invalid. Please try again!".Pastel(Color.Red)}");
+                    Console.WriteLine($"{"Your choice must be greater than 0".Pastel(Color.Red)}");
                 }
 
             }
@@ -266,14 +268,14 @@ namespace FirstBankOfSuncoast
                     }
                     else
                     {
-                        Console.WriteLine("\nYour answer was invalid. Please try again!");
-                        Console.WriteLine("SC Banking does not support overdraw at this time...");
+                        Console.WriteLine($"\n{"Your answer was invalid. Please try again!".Pastel(Color.Red)}");
+                        Console.WriteLine($"{"SC Banking does not support overdraw at this time...".Pastel(Color.Red)}");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("\nYour answer was invalid. Please try again!");
-                    Console.WriteLine("Your choice must be greater than 0");
+                    Console.WriteLine($"\n{"Your answer was invalid. Please try again!".Pastel(Color.Red)}");
+                    Console.WriteLine($"{"Your choice must be greater than 0".Pastel(Color.Red)}");
                 }
 
             }
@@ -318,14 +320,14 @@ namespace FirstBankOfSuncoast
                     }
                     else
                     {
-                        Console.WriteLine("\nYour answer was invalid. Please try again!");
-                        Console.WriteLine("SC Banking does not support overdraw at this time...");
+                        Console.WriteLine($"\n{"Your answer was invalid. Please try again!".Pastel(Color.Red)}");
+                        Console.WriteLine($"{"SC Banking does not support overdraw at this time...".Pastel(Color.Red)}");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("\nYour answer was invalid. Please try again!");
-                    Console.WriteLine("Your choice must be greater than 0");
+                    Console.WriteLine($"\n{"Your answer was invalid. Please try again!".Pastel(Color.Red)}");
+                    Console.WriteLine($"{"Your choice must be greater than 0".Pastel(Color.Red)}");
                 }
 
             }

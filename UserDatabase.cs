@@ -61,16 +61,16 @@ namespace FirstBankOfSuncoast
                 {
                     if (Users.Any(user => user.UserName == newUserName))
                     {
-                        Console.WriteLine("That username is taken. Please Try again!");
-                        Console.WriteLine("Your choice must be a maximum of 8 characters long");
+                        Console.WriteLine($"{"That username is taken. Please Try again!".Pastel(Color.Yellow)}");
+                        Console.WriteLine($"{"Your choice must be a maximum of 8 characters long".Pastel(Color.Yellow)}");
                         continue;
                     }
                     break;
                 }
                 else
                 {
-                    Console.WriteLine("\nYour answer was invalid. Please try again!");
-                    Console.WriteLine("Your choice must be a maximum of 8 characters long");
+                    Console.WriteLine($"\n{"Your answer was invalid. Please try again!".Pastel(Color.Red)}");
+                    Console.WriteLine($"{"Your choice must be a maximum of 8 characters long".Pastel(Color.Red)}");
                 }
             }
 
@@ -85,8 +85,8 @@ namespace FirstBankOfSuncoast
                 }
                 else
                 {
-                    Console.WriteLine("\nYour answer was invalid. Please try again!");
-                    Console.WriteLine("Your choice must be 4 numbers long");
+                    Console.WriteLine($"\n{"Your answer was invalid. Please try again!".Pastel(Color.Red)}");
+                    Console.WriteLine($"{"Your choice must be 4 numbers long".Pastel(Color.Red)}");
                 }
             }
 
@@ -119,15 +119,15 @@ namespace FirstBankOfSuncoast
                     }
                     else
                     {
-                        Console.WriteLine("Incorrect username. Please try again!");
-                        Console.WriteLine("Your choice must be a maximum of 8 characters long");
+                        Console.WriteLine($"{"Incorrect username. Please try again!".Pastel(Color.Red)}");
+                        Console.WriteLine($"{"Your choice must be a maximum of 8 characters long".Pastel(Color.Red)}");
                     }
 
                 }
                 else
                 {
-                    Console.WriteLine("Your answer was invalid. Please try again!");
-                    Console.WriteLine("Your choice must be a maximum of 8 characters long");
+                    Console.WriteLine($"{"Your answer was invalid. Please try again!".Pastel(Color.Red)}");
+                    Console.WriteLine($"{"Your choice must be a maximum of 8 characters long".Pastel(Color.Red)}");
                 }
 
 
@@ -138,7 +138,7 @@ namespace FirstBankOfSuncoast
                 Console.WriteLine("\nPlease enter your pin number (4 numbers, ####) ");
                 var existingPassword = "";
 
-                StringBuilder sb = new StringBuilder();
+                StringBuilder securePassword = new StringBuilder();
                 while (true)
                 {
                     var keyPressed = Console.ReadKey(true);
@@ -149,20 +149,20 @@ namespace FirstBankOfSuncoast
                     }
                     if (keyPressed.Key == ConsoleKey.Backspace)
                     {
-                        if (sb.Length > 0)
+                        if (securePassword.Length > 0)
                         {
                             Console.Write("\b \b");
-                            sb.Length--;
+                            securePassword.Length--;
                         }
                         continue;
                     }
 
                     Console.Write("*");
-                    sb.Append(keyPressed.KeyChar);
+                    securePassword.Append(keyPressed.KeyChar);
 
 
                 }
-                existingPassword += sb.ToString();
+                existingPassword += securePassword.ToString();
                 // Console.WriteLine($"\n{existingPassword}");
 
                 if (existingPassword.Length == 4)
@@ -175,14 +175,14 @@ namespace FirstBankOfSuncoast
                     }
                     else
                     {
-                        Console.WriteLine("Incorrect password. Please try again!");
-                        Console.WriteLine("Your choice must be 4 numbers long");
+                        Console.WriteLine($"\n{"Incorrect password. Please try again!".Pastel(Color.Red)}");
+                        Console.WriteLine($"{"Your choice must be 4 numbers long".Pastel(Color.Red)}");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("\nYour answer was invalid. Please try again!");
-                    Console.WriteLine("Your choice must be 4 numbers long");
+                    Console.WriteLine($"\n{"Your answer was invalid. Please try again!".Pastel(Color.Red)}");
+                    Console.WriteLine($"{"Your choice must be 4 numbers long".Pastel(Color.Red)}");
                 }
 
             }
