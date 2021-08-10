@@ -30,7 +30,7 @@ namespace FirstBankOfSuncoast
 
         static void DisplayExit()
         {
-            // Ascii text from https://www.ascii-art-generator.org/
+            // Ascii text from https://www.ascii-art-generator.org/ & Sun from https://textart.io/art/tag/sun/1
             Console.WriteLine($"{"#######                             ".Pastel(Color.LightSkyBlue)}  {" #     #               ###  ".Pastel(Color.SeaGreen)}{@"            \       |         /         ".Pastel(Color.OrangeRed)}");
             Console.WriteLine($"{"   #    #    #   ##   #    # #    # ".Pastel(Color.LightSkyBlue)}  {"  #   #   ####  #    # ###  ".Pastel(Color.SeaGreen)}{@"  .          .      |        .        . ".Pastel(Color.OrangeRed)}");
             Console.WriteLine($"{"   #    #    #  #  #  ##   # #   #  ".Pastel(Color.LightSkyBlue)}  {"   # #   #    # #    # ###  ".Pastel(Color.SeaGreen)}{@"    .         \             /       .   ".Pastel(Color.OrangeRed)}");
