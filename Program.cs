@@ -185,7 +185,7 @@ namespace FirstBankOfSuncoast
                     Console.Clear();
                     DisplayGreeting();
 
-                    Console.Write($"\nWelcome, {databaseUser.SingularUser.UserName}!\n\nWhat do you want to do?\n(W)withdrawn\n(D)eposes\n(T)ransfer\n(B)alyce Inquiry\n(L)ist All Transactions\n(S)ign Out\n(Q)uit\n: ");
+                    Console.Write($"\nWelcome, {databaseUser.SingularUser.UserName}!\n\nWhat do you want to do?\n(W)ithdraw\n(D)eposit\n(T)ransfer\n(B)alance Inquiry\n(L)ist All Transactions\n(S)ign Out\n(Q)uit\n: ");
                     var loggedInChoices = Console.ReadLine().ToUpper();
 
                     switch (loggedInChoices)
@@ -194,26 +194,31 @@ namespace FirstBankOfSuncoast
                             Console.Clear();
                             DisplayGreeting();
                             Withdraw(databaseUser, databaseTransaction);
+                            PressAnyKey("\nPress Any Key to Continue! ");
                             break;
                         case "D":
                             Console.Clear();
                             DisplayGreeting();
                             Deposit(databaseUser, databaseTransaction);
+                            PressAnyKey("\nPress Any Key to Continue! ");
                             break;
                         case "T":
                             Console.Clear();
                             DisplayGreeting();
                             Transfer(databaseUser, databaseTransaction);
+                            PressAnyKey("\nPress Any Key to Continue! ");
                             break;
                         case "B":
                             Console.Clear();
                             DisplayGreeting();
                             BalaneInquiry(databaseUser, databaseTransaction);
+                            PressAnyKey("\nPress Any Key to Continue! ");
                             break;
                         case "L":
                             Console.Clear();
                             DisplayGreeting();
                             databaseTransaction.ListAllTransactions(databaseUser.SingularUser);
+                            PressAnyKey("\nPress Any Key to Continue! ");
                             break;
                         case "S":
                             databaseUser = MainMenu();
@@ -224,10 +229,13 @@ namespace FirstBankOfSuncoast
                             break;
                         default:
                             Console.WriteLine($"\n{"Your answer was invalid. Please try again!".Pastel(Color.Red)}");
+                            PressAnyKey("\nPress Any Key to Continue! ");
+                            Console.Clear();
+                            DisplayGreeting();
                             break;
                     }
                 }
-                PressAnyKey("\nPress Any Key to Continue! ");
+                // PressAnyKey("\nPress Any Key to Continue! ");
             }
         }
 
@@ -239,12 +247,12 @@ namespace FirstBankOfSuncoast
 
             var keepGoing = true;
 
+            Console.Clear();
+            DisplayGreeting();
+
             // While the user hasn't said QUIT yet
             while (keepGoing && !databaseUser.UserMatches)
             {
-                Console.Clear();
-                DisplayGreeting();
-
                 Console.Write("\nWhat do you want to do?\n(C)reate Account\n(L)ogin to Account\n(Q)uit\n: ");
                 var choices = Console.ReadLine().ToUpper();
 
@@ -252,9 +260,13 @@ namespace FirstBankOfSuncoast
                 {
                     case "C":
                         databaseUser.CreateUser();
+                        PressAnyKey("\nPress Any Key to Continue! ");
+                        Console.Clear();
+                        DisplayGreeting();
                         break;
                     case "L":
                         databaseUser.ExistingUser();
+                        PressAnyKey("\nPress Any Key to Continue! ");
                         break;
                     case "Q":
                         Console.WriteLine();
@@ -262,9 +274,12 @@ namespace FirstBankOfSuncoast
                         break;
                     default:
                         Console.WriteLine($"\n{"Your answer was invalid. Please try again!".Pastel(Color.Red)}");
+                        PressAnyKey("\nPress Any Key to Continue! ");
+                        Console.Clear();
+                        DisplayGreeting();
                         break;
                 }
-                PressAnyKey("\nPress Any Key to Continue! ");
+
             }
 
             return databaseUser;

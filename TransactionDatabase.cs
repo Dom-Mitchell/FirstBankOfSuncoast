@@ -240,7 +240,7 @@ namespace FirstBankOfSuncoast
                 var money = 0.0;
                 var isThisGoodInput = Double.TryParse(Console.ReadLine(), out money);
 
-                if (isThisGoodInput && money > 0)
+                if (isThisGoodInput && money > 0 )
                 {
                     if (((savingsTotal(user) - money) >= 0))
                     {

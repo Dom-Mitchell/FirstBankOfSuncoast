@@ -25,13 +25,13 @@ namespace FirstBankOfSuncoast
             switch (Type)
             {
                 case "Withdraw":
-                    return $"${Amount} was withdrawn by {Name} from {Account} account at {TimeStamp}.";
+                    return $"${Amount} was withdrawn by {Name} from {Account} account on {TimeStamp.ToString("dddd, MMMM dd, yyyy hh:mm tt")}.";
                 case "Withdraw to Transfer":
-                    return $"${Amount} was withdrawn by {Name} to transfer from {Account} account at {TimeStamp}.";
+                    return $"${Amount} was withdrawn by {Name} to transfer from {Account} account on {TimeStamp.ToString("dddd, MMMM dd, yyyy hh:mm tt")}.";
                 case "Deposit":
-                    return $"${Amount} was deposited by {Name} into {Account} account at {TimeStamp}.";
+                    return $"${Amount} was deposited by {Name} into {Account} account on {TimeStamp.ToString("dddd, MMMM dd, yyyy hh:mm tt")}.";
                 case "Deposit to Transfer":
-                    return $"{Amount} was deposited by {Name} to transfer into {Account} account at {TimeStamp}.";
+                    return $"{Amount} was deposited by {Name} to transfer into {Account} account on {TimeStamp.ToString("dddd, MMMM dd, yyyy hh:mm tt")}.";
                 default:
                     return "\nYour answer was invalid. Please try again!";
 

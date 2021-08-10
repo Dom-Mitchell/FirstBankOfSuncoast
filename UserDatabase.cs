@@ -77,9 +77,11 @@ namespace FirstBankOfSuncoast
             while (!correctPinLength)
             {
                 Console.WriteLine("What do you want your pin to be? (4 numbers, ####) ");
-                newPin = Int32.Parse(Console.ReadLine());
+                // newPin = Int32.Parse(Console.ReadLine());
 
-                if (newPin.ToString().Length == 4)
+                var isThisGoodInput = Int32.TryParse(Console.ReadLine(), out newPin);
+
+                if (isThisGoodInput && newPin.ToString().Length == 4)
                 {
                     break;
                 }
@@ -94,8 +96,7 @@ namespace FirstBankOfSuncoast
             SingularUser.Password = newPin;
 
             Users.Add(SingularUser);
-            SaveUsers();
-
+            SaveUsers(); 
         }
 
         public void ExistingUser()
