@@ -241,6 +241,7 @@ namespace FirstBankOfSuncoast
                             PressAnyKey("\nPress Any Key to Continue! ");
                             break;
                         case "S":
+                            PressAnyKey("\nPress Any Key to Sign Out! ");
                             databaseUser = MainMenu();
                             break;
                         case "Q":
@@ -287,7 +288,7 @@ namespace FirstBankOfSuncoast
                         break;
                     case "L":
                         databaseUser.ExistingUser();
-                        PressAnyKey("\nPress Any Key to Continue! ");
+                        PressAnyKey("\nPress Any Key to Login! ");
                         break;
                     case "Q":
                         Console.Clear();

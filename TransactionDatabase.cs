@@ -233,14 +233,14 @@ namespace FirstBankOfSuncoast
         public void TransferToChecking(User user)
         {
             var madeTransfer = false;
-            while (madeTransfer)
+            while (!madeTransfer)
             {
                 Console.WriteLine($"\nHow much money would you like to Transfer from your Savings into your Checking Account, {user.UserName}? ");
 
                 var money = 0.0;
                 var isThisGoodInput = Double.TryParse(Console.ReadLine(), out money);
 
-                if (isThisGoodInput && money > 0 )
+                if (isThisGoodInput && money > 0)
                 {
                     if (((savingsTotal(user) - money) >= 0))
                     {
@@ -252,7 +252,7 @@ namespace FirstBankOfSuncoast
                         Transactions.Add(newTransaction);
                         SaveTransactions();
 
-                        Console.WriteLine($"Funds Withdrawn from {user.UserName}'s Savings Account");
+                        Console.WriteLine($"\nFunds Withdrawn from {user.UserName}'s Savings Account");
 
                         var secondTransaction = new Transaction();
                         secondTransaction.Name = user.UserName;
@@ -285,7 +285,7 @@ namespace FirstBankOfSuncoast
         public void TransferToSaving(User user)
         {
             var madeTransfer = false;
-            while (madeTransfer)
+            while (!madeTransfer)
             {
                 Console.WriteLine($"\nHow much money would you like to Transfer from your Checking into your Savings Account, {user.UserName}? ");
 
@@ -304,7 +304,7 @@ namespace FirstBankOfSuncoast
                         Transactions.Add(newTransaction);
                         SaveTransactions();
 
-                        Console.WriteLine($"Funds Withdrawn from {user.UserName}'s Checking Account");
+                        Console.WriteLine($"\nFunds Withdrawn from {user.UserName}'s Checking Account");
 
                         var secondTransaction = new Transaction();
                         secondTransaction.Name = user.UserName;
