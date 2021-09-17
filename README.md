@@ -2,8 +2,6 @@
 
 ## Assignment
 
-
-
 ```csharp
 var existingPassword = "";
 
@@ -32,6 +30,7 @@ while (true)
 
 }
 existingPassword += securePassword.ToString();
+
 // Testing to see if password is being typed.
 
 // Console.WriteLine($"\n{existingPassword}");
