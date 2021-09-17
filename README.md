@@ -7,7 +7,7 @@ The goal of this assignment was to create a console app that allows a user to ma
 <details>
 <summary>Example</summary>
 <br/> 
-Handle the following transactions: 
+User transactions: 
 <br/><br/>
 A user deposits $10 to their savings 
 <br/> 
