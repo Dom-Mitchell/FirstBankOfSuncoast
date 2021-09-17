@@ -2,13 +2,7 @@
 
 ## Assignment
 
-The goal of this assignment was to create a console app that allows a user to manage savings and checking banking transactions.
-
-<br/>
-
-A user can/will make a series of transactions.
-
-<br/>
+The goal of this assignment was to create a console app that allows a user to manage savings and checking banking transactions. A user can/will make a series of transactions as well.
 
 <details>
 <summary>Example</summary>
@@ -25,8 +19,6 @@ The user has three transactions to consider
 <br/><br/>
 In this case, the user's savings balance is $2 and their checking balance is $25
 </details>
-
-<br/>
 
 The transactions have been **saved** in a file, using a `CSV` format to record the data.
 
